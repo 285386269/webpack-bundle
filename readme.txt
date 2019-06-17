@@ -77,3 +77,8 @@ sourcemap：会产生 .map 文件；
 cheap：不包含列的信息；
 inline：sourcemap 内联在了js文件中，不单独生成.map文件；
 module：包含 loader 的 sourcemap。
+
+提取公共资源？
+基础库分离，例如：react、react-dom 基础包通过 cdn 引入，不打入 bundle 中；
+也可以使用 html-webpack-externals-plugin 进行分离。
+利用 SplitChunksPlugin 进行公共脚本分离，替代 CommonsChunkPlugin。
