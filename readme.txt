@@ -67,3 +67,6 @@ PostCSS 插件？(它是一个后处理器)
 内联html --- <script>${require('raw-loader!babel-loader!./meta.html')}</script>
 内联js --- <script>${require('raw-loader!babel-loader!../node_modules/lib-flexible')}</script>
 内联css --- 借助 style-loader，或者借助 html-inline-css-webpack-plugin(这个用的多)。
+
+多页面应用？
+它对SEO更加友好，分离功能和应用，单个页面加载会更快。
