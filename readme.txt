@@ -70,3 +70,10 @@ PostCSS 插件？(它是一个后处理器)
 
 多页面应用？
 它对SEO更加友好，分离功能和应用，单个页面加载会更快。
+
+sourmap？
+eval: 使用 eval 来包裹代码；
+sourcemap：会产生 .map 文件；
+cheap：不包含列的信息；
+inline：sourcemap 内联在了js文件中，不单独生成.map文件；
+module：包含 loader 的 sourcemap。
