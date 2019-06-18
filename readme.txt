@@ -67,3 +67,54 @@ PostCSS 插件？(它是一个后处理器)
 内联html --- <script>${require('raw-loader!babel-loader!./meta.html')}</script>
 内联js --- <script>${require('raw-loader!babel-loader!../node_modules/lib-flexible')}</script>
 内联css --- 借助 style-loader，或者借助 html-inline-css-webpack-plugin(这个用的多)。
+
+多页面应用？
+它对SEO更加友好，分离功能和应用，单个页面加载会更快。
+
+sourmap？
+eval: 使用 eval 来包裹代码；
+source-map：会产生 .map 文件；
+cheap：不包含列的信息；
+inline：sourcemap 内联在了js文件中，不单独生成.map文件；
+module：包含 loader 的 sourcemap。
+
+提取公共资源？
+基础库分离，例如：react、react-dom 不打入 bundle 中，可以使用 html-webpack-externals-plugin 进行分离，
+然后通过 CDN 方式引入。用法是：html-webpack-externals-plugin 分离 + html 中引入。
+
+其它公共脚本，可以利用 SplitChunksPlugin 进行分离，替代 CommonsChunkPlugin(废弃掉)。
+chunks 参数说明 --- async(异步引入)、initial(同步引入)、all(推荐)。
+
+可以通过 splitChunks 将 react 和 react-dom 提取成公共基础包 vendors：
+1) 引入 chunks: ['vendors', pageName],
+2) 配置
+optimization: {
+    splitChunks: {
+        minSize: 0,
+        cacheGroups: { // 这个可以是多个属性，方便扩展
+            vendors: {
+                test: /(react|react-dom)/,
+                name: 'vendors',
+                chunks: 'all'
+            }
+        }
+    }
+},
+
+也可以将其它公共代码，提取一个公共基础包，例如：commons 文件夹下的 js 文件多个地方用到：
+1) 引入 chunks: ['vendors', 'commons', pageName],
+2) 配置
+splitChunks: {
+    minSize: 0,
+    cacheGroups: {
+        commons: {
+            name: 'commons',
+            chunks: 'all',
+            minChunks: 2
+        }
+    }
+}
+
+tree shaking？
+在 webpack 4 中设置了 mode=production 时，会自动用上。前提是：es6语法。
+利用 es6 模块的特点，进行 DCE 检测，然后借助 uglifyjs 擦除用不到的代码。
