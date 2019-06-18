@@ -82,3 +82,7 @@ module：包含 loader 的 sourcemap。
 基础库分离，例如：react、react-dom 基础包通过 cdn 引入，不打入 bundle 中；
 也可以使用 html-webpack-externals-plugin 进行分离。
 利用 SplitChunksPlugin 进行公共脚本分离，替代 CommonsChunkPlugin。
+
+tree shaking？
+在 webpack 4 中设置了 mode=production 时，会自动用上。前提是：es6语法。
+利用 es6 模块的特点，进行 DCE 检测，然后借助 uglifyjs 擦除用不到的代码。
