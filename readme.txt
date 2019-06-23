@@ -118,3 +118,18 @@ splitChunks: {
 tree shaking？
 在 webpack 4 中设置了 mode=production 时，会自动用上。前提是：es6语法。
 利用 es6 模块的特点，进行 DCE 检测，然后借助 uglifyjs 擦除用不到的代码。
+
+代码分割后的异步加载？
+import('./text.js').then((Text)=> {
+    Text: Text.default
+})
+
+webpack 和 ESLint 结合？
+Airbnb：eslint-config-airbnb、eslint-config-airbnb-base、eslint-react...
+国内也有自己来定制规范。一般为了避免重复造轮子，可以基于 eslint:recommend 配置进行改进，能够帮助发现代码错误的规则，全部开启。
+帮助保持团队的代码风格统一，而不是限制开发体验。
+ESLint 如何落地？可以和 CI/CD 系统集成，或者和 webpack 集成。
+使用eslint-loader，构建时检查 js 规范。
+npm install eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y -D
+npm install eslint-loader -D
+npm install babel-eslint -D

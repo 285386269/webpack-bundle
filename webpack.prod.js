@@ -46,7 +46,12 @@ module.exports = {
     mode: 'production',
     module: {
         rules: [
-            {test: /\.js$/, use: 'babel-loader'},
+            {
+                enforce: 'pre',
+                test: /\.js$/, 
+                include: path.join(__dirname, './src'),
+                use: ['babel-loader', 'eslint-loader'],
+            },
             {test:/\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader' ]},
             {
                 test:/\.less$/, 
