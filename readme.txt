@@ -133,3 +133,6 @@ ESLint 如何落地？可以和 CI/CD 系统集成，或者和 webpack 集成。
 npm install eslint eslint-plugin-import eslint-plugin-react eslint-plugin-jsx-a11y -D
 npm install eslint-loader -D
 npm install babel-eslint -D
+
+webpack 打包组件和库？
+一般分为压缩版和非压缩版，支持 AMD/CJS/ESM。

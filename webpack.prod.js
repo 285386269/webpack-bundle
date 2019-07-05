@@ -50,7 +50,8 @@ module.exports = {
                 enforce: 'pre',
                 test: /\.js$/, 
                 include: path.join(__dirname, './src'),
-                use: ['babel-loader', 'eslint-loader'],
+                use: ['babel-loader'],
+                // use: ['babel-loader', 'eslint-loader'],
             },
             {test:/\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader' ]},
             {

@@ -55,6 +55,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "large-number-hlj": "^1.0.0",
     "lib-flexible": "^0.3.2"
   }
 }
