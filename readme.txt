@@ -136,3 +136,21 @@ npm install babel-eslint -D
 
 webpack 打包组件和库？
 一般分为压缩版和非压缩版，支持 AMD/CJS/ESM。
+
+服务器端渲染 SSR？
+浏览器的全局变量(node.js 中没有 document，window)
+组件适配：组件内的内容做一些调整，例如：
+1) import -> require；
+2) ReactDOM.render -> module.exports = <Search></Search>；
+3) 服务端针对 window 特殊处理(放在顶部)：
+if(typeof window === 'undefined') {
+    global.window = {};
+}
+请求适配：将 fetch 或者 ajax 发送请求的写法 isomorphic-fetch 或者 axios。
+
+样式问题(node.js 无法解析样式模块)
+方案1：服务端打包通过 ignore-loader 忽略掉 css 的解析(推荐)；
+方案2：将 style-loader 替换成 isomorphic-style-loader。
+
+我们可以在模板中设定占位符，然后动态插入组件，以此来应用客户端的样式；
+数据同样可以通过设定占位符，然后动态添加到前端去。
